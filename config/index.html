@@ -62,6 +62,15 @@
       <div class='item-container-footer'>
         This skips some of Pip-Pip's POST to make it load quicker (i.e. faster startup animation).
       </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Fast boot
+          <input id='no_bg_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Don't display the CRT-style background.
+      </div>
     </div>
 
     <div class='item-container'>
@@ -75,16 +84,19 @@
     var textColorPicker = document.getElementById('text_color_picker');
     var lineColorPicker = document.getElementById('line_color_picker');
     var fastAnimCheckbox = document.getElementById('fast_anim_checkbox');
+    var noBgCheckbox = document.getElementById('no_bg_checkbox');
  
     var options = {
       'text_color': textColorPicker.value,
       'line_color': lineColorPicker.value,
-      'fast_anim': fastAnimCheckbox.checked
+      'fast_anim': fastAnimCheckbox.checked,
+      'no_bg': fastAnimCheckbox.checked
     };
     // Save for next launch
     localStorage['text_color'] = options['text_color'];
     localStorage['line_color'] = options['line_color'];
     localStorage['fast_anim'] = options['fast_anim'];
+    localStorage['no_bg'] = options['no_bg'];
     console.log('Got options: ' + JSON.stringify(options));
     return options;
   }
@@ -111,8 +123,10 @@
     var textColorPicker = document.getElementById('text_color_picker');
     var lineColorPicker = document.getElementById('line_color_picker');
     var fastAnimCheckbox = document.getElementById('fast_anim_checkbox');
+    var noBgCheckbox = document.getElementById('no_bg_checkbox');
     // Load any previously saved configuration, if available
     if(localStorage['fast_anim']) {  fastAnimCheckbox.checked = JSON.parse(localStorage['fast_anim']); }
+    if(localStorage['no_bg']) {  fastAnimCheckbox.checked = JSON.parse(localStorage['no_bg']); }
     if(localStorage['text_color']) {  textColorPicker.value = localStorage['text_color']; }
     if(localStorage['line_color']) {  lineColorPicker.value = localStorage['line_color']; }
   })();
