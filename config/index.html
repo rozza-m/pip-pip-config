@@ -18,7 +18,7 @@
   </head>
 
   <body>
-    <h1 class='title'>Slate Example Configuration</h1>
+    <h1 class='title'>Pip-Boy Configuration</h1>
 
     <div class='item-container'>
       <div class='item-container-content'>
@@ -29,28 +29,38 @@
     </div>
 
     <div class='item-container'>
-      <div class='item-container-header'>Customizability</div>
+      <div class='item-container-header'>Colours</div>
       <div class='item-container-content'>
         <label class='item'>
-          Background Color
-          <input id='background_color_picker' type='text' class='item-color item-color-sunny' value='#000000'>
+          Character Color
+          <input id='text_color_picker' type='text' class='item-color item-color-sunny' value='#000000'>
         </label>
       </div>
       <div class='item-container-footer'>
-        Choose the app's background color. Used if High Contrast Mode is not selected. Note: Only available on Basalt watches that support many colors.
+        Choose the app's character color. Note: Only available on Basalt watches that support many colors.
+      </div>
+       <div class='item-container-header'>Colours</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          UI Color
+          <input id='line_color_picker' type='text' class='item-color item-color-sunny' value='#000000'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the app's UI color, used to colour the accent lines. Note: Only available on Basalt watches that support many colors.
       </div>
     </div>
 
     <div class='item-container'>
-      <div class='item-container-header'>Accessibility</div>
+      <div class='item-container-header'>Other stuff</div>
       <div class='item-container-content'>
         <label class='item'>
-          High Contrast Mode
-          <input id='high_contrast_checkbox' type='checkbox' class='item-toggle'>
+          Fast boot
+          <input id='fast_anim_checkbox' type='checkbox' class='item-toggle'>
         </label>
       </div>
       <div class='item-container-footer'>
-        This switches the app colors to a higher contrast set that promotes readability in low light.
+        This skips some of Pip-Pip's POST to make it load quicker (i.e. faster startup animation).
       </div>
     </div>
 
@@ -62,17 +72,20 @@
   </body>
   <script>
   function getConfigData() {
-    var backgroundColorPicker = document.getElementById('background_color_picker');
-    var highContrastCheckbox = document.getElementById('high_contrast_checkbox');
+    var textColorPicker = document.getElementById('text_color_picker');
+    var lineColorPicker = document.getElementById('line_color_picker');
+    var fastAnimCheckbox = document.getElementById('fast_anim_checkbox');
  
     var options = {
-      'background_color': backgroundColorPicker.value,
-      'high_contrast': highContrastCheckbox.checked
+      'text_color': textColorPicker.value,
+      'line_color': lineColorPicker.value,
+      'fast_anim': fastAnimCheckbox.checked
     };
 
     // Save for next launch
-    localStorage['background_color'] = options['background_color'];
-    localStorage['high_contrast'] = options['high_contrast'];
+    localStorage['text_color'] = options['text_color'];
+    localStorage['line_color'] = options['line_color'];
+    localStorage['fast_anim'] = options['fast_anim'];
 
     console.log('Got options: ' + JSON.stringify(options));
     return options;
@@ -100,13 +113,15 @@
   });
 
   (function() {
-    var backgroundColorPicker = document.getElementById('background_color_picker');
-    var highContrastCheckbox = document.getElementById('high_contrast_checkbox');
+    var textColorPicker = document.getElementById('text_color_picker');
+    var lineColorPicker = document.getElementById('line_color_picker');
+    var fastAnimCheckbox = document.getElementById('fast_anim_checkbox');
 
     // Load any previously saved configuration, if available
-    if(localStorage['high_contrast']) {
-      highContrastCheckbox.checked = JSON.parse(localStorage['high_contrast']);
-      backgroundColorPicker.value = localStorage['background_color'];
+    if(localStorage['fast_anim']) {
+      fastAnimCheckbox.checked = JSON.parse(localStorage['fast_anim']);
+      textColorPicker.value = localStorage['text_color'];
+      lineColorPicker.value = localStorage['line_color'];
     }
   })();
   </script>
