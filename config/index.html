@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>PIP-BOY</title>
+  <title>Slate Example Configuration</title>
   <link rel='stylesheet' type='text/css' href='css/slate.min.css'>
   <script src='js/slate.min.js'></script>
   <style>
@@ -21,6 +21,14 @@
     <h1 class='title'>Pip-Boy Configuration</h1>
 
     <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          Use this configuration page to choose the settings you would like applied to this app.
+        </div>
+      </div>
+    </div>
+
+    <div class='item-container'>
       <div class='item-container-header'>Colours</div>
       <div class='item-container-content'>
         <label class='item'>
@@ -29,7 +37,7 @@
         </label>
       </div>
       <div class='item-container-footer'>
-        Choose the app's character color. (colour watches only)
+        Choose the app's character color. Note: Only available on Basalt watches that support many colors.
       </div>
        <div class='item-container-header'>Colours</div>
       <div class='item-container-content'>
@@ -39,12 +47,12 @@
         </label>
       </div>
       <div class='item-container-footer'>
-        Choose the app's UI color, used to colour the accent lines. (colour watches only)
+        Choose the app's UI color, used to colour the accent lines. Note: Only available on Basalt watches that support many colors.
       </div>
     </div>
 
     <div class='item-container'>
-      <div class='item-container-header'>OS OPTIONS</div>
+      <div class='item-container-header'>Other stuff</div>
       <div class='item-container-content'>
         <label class='item'>
           Fast boot
@@ -53,15 +61,6 @@
       </div>
       <div class='item-container-footer'>
         This skips some of Pip-Pip's POST to make it load quicker (i.e. faster startup animation).
-      </div>
-      <div class='item-container-content'>
-        <label class='item'>
-          No background
-          <input id='no_bg_checkbox' type='checkbox' class='item-toggle'>
-        </label>
-      </div>
-      <div class='item-container-footer'>
-        Hide the background effect (colour watches only).
       </div>
     </div>
 
@@ -76,25 +75,19 @@
     var textColorPicker = document.getElementById('text_color_picker');
     var lineColorPicker = document.getElementById('line_color_picker');
     var fastAnimCheckbox = document.getElementById('fast_anim_checkbox');
-    var noBgCheckbox = document.getElementById('no_bg_checkbox');
  
     var options = {
       'text_color': textColorPicker.value,
       'line_color': lineColorPicker.value,
       'fast_anim': fastAnimCheckbox.checked
-      'no_bg': fastAnimCheckbox.checked
     };
-
     // Save for next launch
     localStorage['text_color'] = options['text_color'];
     localStorage['line_color'] = options['line_color'];
     localStorage['fast_anim'] = options['fast_anim'];
-    localStorage['no_bg'] = options['no_bg'];
-
     console.log('Got options: ' + JSON.stringify(options));
     return options;
   }
-
   function getQueryParam(variable, defaultValue) {
     var query = location.search.substring(1);
     var vars = query.split('&');
@@ -110,24 +103,18 @@
   var submitButton = document.getElementById('submit_button');
   submitButton.addEventListener('click', function() {
     console.log('Submit');
-
     // Set the return URL depending on the runtime environment
     var return_to = getQueryParam('return_to', 'pebblejs://close#');
     document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
   });
-
   (function() {
     var textColorPicker = document.getElementById('text_color_picker');
     var lineColorPicker = document.getElementById('line_color_picker');
     var fastAnimCheckbox = document.getElementById('fast_anim_checkbox');
-    var noBgCheckbox = document.getElementById('no_bg_checkbox');
-
     // Load any previously saved configuration, if available
-    if(localStorage['fast_anim']) {      fastAnimCheckbox.checked = JSON.parse(localStorage['fast_anim']); }
-    if(localStorage['no_bg']) {      fastAnimCheckbox.checked = JSON.parse(localStorage['no_bg']); }
-    if(localStorage['text_color']) {  textColorPicker.value = localStorage['text_color'];
-    if(localStorage['line_color']) {  lineColorPicker.value = localStorage['line_color'];
-    
+    if(localStorage['fast_anim']) {  fastAnimCheckbox.checked = JSON.parse(localStorage['fast_anim']); }
+    if(localStorage['text_color']) {  textColorPicker.value = localStorage['text_color']; }
+    if(localStorage['line_color']) {  lineColorPicker.value = localStorage['line_color']; }
   })();
   </script>
 </html>
