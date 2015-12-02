@@ -46,6 +46,15 @@
       <div class='item-container-header'>OS Options</div>
       <div class='item-container-content'>
         <label class='item'>
+          Month first
+          <input id='month_first_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Swaps the day and month (North America style).
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
           Fast boot
           <input id='fast_anim_checkbox' type='checkbox' class='item-toggle'>
         </label>
@@ -60,7 +69,7 @@
         </label>
       </div>
       <div class='item-container-footer'>
-        Don't display the CRT-style background.
+        Don't display the CRT-style background. (Colour watches only.)
       </div>
     </div>
 
@@ -76,18 +85,21 @@
     var lineColorPicker = document.getElementById('line_color_picker');
     var fastAnimCheckbox = document.getElementById('fast_anim_checkbox');
     var noBgCheckbox = document.getElementById('no_bg_checkbox');
+    var monthFirstCheckbox = document.getElementById('month_first_checkbox');
  
     var options = {
       'text_color': textColorPicker.value,
       'line_color': lineColorPicker.value,
       'fast_anim': fastAnimCheckbox.checked,
-      'no_bg': noBgCheckbox.checked
+      'no_bg': noBgCheckbox.checked,
+      'month_first': monthFirstCheckbox.checked
     };
     // Save for next launch
     localStorage['text_color'] = options['text_color'];
     localStorage['line_color'] = options['line_color'];
     localStorage['fast_anim'] = options['fast_anim'];
     localStorage['no_bg'] = options['no_bg'];
+    localStorage['month_first'] = options['month_first'];
     console.log('Got options: ' + JSON.stringify(options));
     return options;
   }
@@ -115,11 +127,13 @@
     var lineColorPicker = document.getElementById('line_color_picker');
     var fastAnimCheckbox = document.getElementById('fast_anim_checkbox');
     var noBgCheckbox = document.getElementById('no_bg_checkbox');
+    var monthFirstCheckbox = document.getElementById('month_first_checkbox');
     // Load any previously saved configuration, if available
     if(localStorage['fast_anim']) {  fastAnimCheckbox.checked = JSON.parse(localStorage['fast_anim']); }
     if(localStorage['no_bg']) {  noBgCheckbox.checked = JSON.parse(localStorage['no_bg']); }
     if(localStorage['text_color']) {  textColorPicker.value = localStorage['text_color']; }
     if(localStorage['line_color']) {  lineColorPicker.value = localStorage['line_color']; }
+    if(localStorage['month_first']) {  lineColorPicker.value = localStorage['month_first']; }
   })();
   </script>
 </html>
