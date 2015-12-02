@@ -37,9 +37,8 @@
         </label>
       </div>
       <div class='item-container-footer'>
-        Choose the app's character color. Note: Only available on Basalt watches that support many colors.
+        Choose the app's character color. (Colour watches only.)
       </div>
-       <div class='item-container-header'>Colours</div>
       <div class='item-container-content'>
         <label class='item'>
           UI Color
@@ -47,12 +46,12 @@
         </label>
       </div>
       <div class='item-container-footer'>
-        Choose the app's UI color, used to colour the accent lines. Note: Only available on Basalt watches that support many colors.
+        Choose the app's UI color, used to colour the accent lines. (Colour watches only.)
       </div>
     </div>
 
     <div class='item-container'>
-      <div class='item-container-header'>Other stuff</div>
+      <div class='item-container-header'>OS Options</div>
       <div class='item-container-content'>
         <label class='item'>
           Fast boot
@@ -64,7 +63,7 @@
       </div>
       <div class='item-container-content'>
         <label class='item'>
-          Fast boot
+          Hide background
           <input id='no_bg_checkbox' type='checkbox' class='item-toggle'>
         </label>
       </div>
@@ -90,7 +89,7 @@
       'text_color': textColorPicker.value,
       'line_color': lineColorPicker.value,
       'fast_anim': fastAnimCheckbox.checked,
-      'no_bg': fastAnimCheckbox.checked
+      'no_bg': noBgCheckbox.checked
     };
     // Save for next launch
     localStorage['text_color'] = options['text_color'];
